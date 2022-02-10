@@ -16,6 +16,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'mengelbrecht/lightline-bufferline'
 
+  Plug 'frazrepo/vim-rainbow'
+
 call plug#end()
 
 
@@ -229,7 +231,8 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-
+" bracket rainbow plugin conf
+ let g:rainbow_active = 1
 
 
 " ========================
