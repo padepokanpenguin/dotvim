@@ -18,6 +18,12 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'frazrepo/vim-rainbow'
 
+  Plug 'easymotion/vim-easymotion'
+
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+  Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 
@@ -270,7 +276,7 @@ nmap Q <C-w>q
 
 " Keybinding NERDTree plugin
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
+"nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <space> za
@@ -366,6 +372,24 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+" easymotion keybinding configuration
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 
 " =========================
