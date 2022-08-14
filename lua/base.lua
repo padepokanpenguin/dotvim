@@ -33,6 +33,10 @@ vim.opt.background = "dark" -- or "light" for light mode
 vim.opt.showtabline = 2
 vim.opt.termguicolors = true
 vim.opt.updatetime = 100
+vim.opt.winblend = 0
+vim.opt.wildoptions = 'pum'
+vim.opt.pumblend = 5
+vim.opt.cursorline = true
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
