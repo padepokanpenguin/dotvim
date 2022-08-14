@@ -24,7 +24,7 @@ packer.startup(function(use)
   use 'L3MON4D3/LuaSnip' -- Snippet
   use 'hoob3rt/lualine.nvim' -- Status line
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  --use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in lsp
   use 'hrsh7th/nvim-cmp' -- completion
   use 'neovim/nvim-lspconfig' -- LSP  

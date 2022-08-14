@@ -48,17 +48,17 @@ vim.cmd([[colorscheme gruvbox]])
 
 -- Turn off paste mode when leaving insert mode
 vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
-  command = 'set nopaste'
+	pattern = '*',
+	command = 'set nopaste'
 })
 
 vim.api.nvim_create_autocmd("InsertEnter", {
-  command = "set norelativenumber",
-  pattern = "*"
+	command = "set norelativenumber",
+	pattern = "*"
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
-  command = "set relativenumber",
-  pattern = "*"
+	command = "set relativenumber",
+	pattern = "*"
 })
 
 -- Add aterisks in block comments
