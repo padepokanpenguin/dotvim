@@ -19,7 +19,37 @@ lualine.setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { {
+      'mode',
+      icons_enabled = true, -- Enables the display of icons alongside the component.
+      -- Defines the icon to be displayed in front of the component.
+      -- Can be string|table
+      -- As table it must contain the icon as first entry and can use
+      -- color option to custom color the icon. Example:
+      -- {'branch', icon = ''} / {'branch', icon = {'', color={fg='green'}}}
+
+      -- icon position can also be set to the right side from table. Example:
+      -- {'branch', icon = {'', align='right', color={fg='green'}}}
+      icon = { ' ', align = 'left', color = { fg = '#282828' } },
+
+      color = nil, -- The default is your theme's color for that section and mode.
+
+      -- Specify what type a component is, if omitted, lualine will guess it for you.
+      --
+      -- Available types are:
+      --   [format: type_name(example)], mod(branch/filename),
+      --   stl(%f/%m), var(g:coc_status/bo:modifiable),
+      --   lua_expr(lua expressions), vim_fun(viml function name)
+      --
+      -- Note:
+      -- lua_expr is short for lua-expression and vim_fun is short for vim-function.
+      type = nil,
+
+      padding = .01, -- Adds padding to the left and right of components.
+      -- Padding can be specified to left or right independently, e.g.:
+      --   padding = { left = left_padding, right = right_padding }
+
+    } },
     lualine_b = { 'branch' },
     lualine_c = {
       {
@@ -34,10 +64,10 @@ lualine.setup {
         shorting_target = 5, -- Shortens path to leave 40 spaces in the window
         -- for other components. (terrible name, any suggestions?)
         symbols = {
-          modified = '[+]', -- Text to show when the file is modified.
-          readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-          unnamed = '[No Name]', -- Text to show for unnamed buffers.
-          newfile = '[New]', -- Text to show for new created file before first writting
+          modified = ' פֿ ', -- Text to show when the file is modified.
+          readonly = '  ', -- Text to show when the file is non-modifiable or readonly.
+          unnamed = '  ', -- Text to show for unnamed buffers.
+          newfile = '  ', -- Text to show for new created file before first writting
         }
       }
     },
@@ -50,7 +80,14 @@ lualine.setup {
         info = ' ',
         hint = ' '
       }
-    }, 'encoding', 'filetype' },
+    }, 'encoding', 'filetype', {
+      'fileformat',
+      symbols = {
+        unix = '', -- e712
+        dos = '', -- e70f
+        mac = '', -- e711
+      }
+    } },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -82,6 +119,7 @@ lualine.setup {
         newfile = '[New]' -- Text to show for new created file before first writting
       }
     } },
+    lualine_b = {},
     lualine_z = { function()
       return [[PenguinHouse]]
     end }
