@@ -83,9 +83,9 @@ lualine.setup {
     }, 'encoding', 'filetype', {
       'fileformat',
       symbols = {
-        unix = '', -- e712
-        dos = '', -- e70f
-        mac = '', -- e711
+        unix = ' Unix', -- e712
+        dos = ' Windows', -- e70f
+        mac = ' MacOs', -- e711
       }
     } },
     lualine_y = { 'progress' },
