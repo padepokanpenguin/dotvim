@@ -12,7 +12,7 @@ ts.setup {
         enable = true,
         disable = {}
     },
-    ensure_installed = {'tsx', 'lua', 'json', 'css'},
+   ensure_installed = {'tsx', 'lua', 'json', 'css'},
     autotag = {
         enable = true
     }
