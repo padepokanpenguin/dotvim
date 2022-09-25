@@ -37,6 +37,7 @@ vim.opt.winblend = 0
 vim.opt.wildoptions = 'pum'
 vim.opt.pumblend = 5
 vim.opt.cursorline = true
+vim.api.nvim_command('set noswapfile')
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
@@ -48,17 +49,17 @@ vim.cmd([[colorscheme gruvbox]])
 
 -- Turn off paste mode when leaving insert mode
 vim.api.nvim_create_autocmd("InsertLeave", {
-	pattern = '*',
-	command = 'set nopaste'
+  pattern = '*',
+  command = 'set nopaste'
 })
 
 vim.api.nvim_create_autocmd("InsertEnter", {
-	command = "set norelativenumber",
-	pattern = "*"
+  command = "set norelativenumber",
+  pattern = "*"
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
-	command = "set relativenumber",
-	pattern = "*"
+  command = "set relativenumber",
+  pattern = "*"
 })
 
 -- Add aterisks in block comments

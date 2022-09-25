@@ -63,11 +63,13 @@ nvim_lsp.flow.setup {
   capabilities = capabilities
 }
 
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  cmd = { "typescript-language-server", "--stdio" },
+--nvim_lsp.tsserver.setup {
+--  on_attach = on_attach,
+--  cmd = { "typescript-language-server", "--stdio" },
 --  capabilities = capabilities
-}
+--}
+
+nvim_lsp.tsserver.setup {}
 
 nvim_lsp.sourcekit.setup {
   on_attach = on_attach,
@@ -90,6 +92,8 @@ nvim_lsp.sumneko_lua.setup {
     },
   },
 }
+
+--nvim_lsp.sumneko_lua.setup {}
 
 nvim_lsp.tailwindcss.setup {}
 
