@@ -4,7 +4,7 @@ if (not status) then
   return
 end
 
-db.custom_header = { "",
+db.cusom_footer = { "",
   "                                                 ..                                                 ",
   "                                               ..:^:.                                               ",
   "                                             .:::::^^:.                                             ",

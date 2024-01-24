@@ -24,9 +24,11 @@ cmp.setup({
         { name = 'buffer' }
     }),
     formatting = {
-        format = lspkind.cmp_format({ with_text = false, maxWidth = 50 })
-    }
+        format = lspkind.cmp_format({ with_text = true, maxWidth = 50 }),
+        show_labelDetails = true, -- show labelDetails in menu. Disabled by default  
+  }
 })
+
 
 vim.cmd [[
     set completeopt=menuone,noinsert,noselect

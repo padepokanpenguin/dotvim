@@ -13,6 +13,10 @@ if (not status) then return end
 --}
 
 ts.setup {
+  modules = {},
+  auto_install = true,
+  sync_install = true,
+  ignore_install = {},
   highlight = {
     enable = true,
     disable = {},
@@ -21,15 +25,14 @@ ts.setup {
     enable = true,
     disable = {},
   },
-  --  ensure_installed = {
-  --    "tsx",
-  --    "php",
-  --    "json",
-  --    "yaml",
-  --    "css",
-  --    "html",
-  --    "lua"
-  --  },
+    ensure_installed = {
+      "tsx",
+      "php",
+      "json",
+      "css",
+      "html",
+      "lua"
+    },
   autotag = {
     enable = true,
   },

@@ -10,5 +10,5 @@ end
 mason.setup({})
 
 lspconfig.setup {
-    ensure_installed = {"sumneko_lua", "tailwindcss", "quick_lint_js", "tsserver"}
+    ensure_installed = {"synk_ls", "typos_lsp"}
 }
