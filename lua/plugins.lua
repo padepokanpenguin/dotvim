@@ -1,70 +1,54 @@
-local status, packer = pcall(require, 'packer')
-if (not status) then
-  print("Packer is not installed")
-  return
-end
+-- Plugin specifications for lazy.nvim (https://lazy.folke.io/spec).
+--
+-- All plugins are loaded eagerly on purpose: this config styles itself through
+-- `plugin/*.rc.lua` and `after/plugin/*.rc.lua`, which are sourced once at
+-- startup. Lazy-loading a plugin would make those files run before the plugin
+-- exists.
+--
+-- Plugin sources were moved to their current maintained homes (the old
+-- authors are archived / renamed upstream).
 
-vim.cmd [[packadd packer.nvim]]
+return {
+  -- Colorscheme
+  { 'ellisonleao/gruvbox.nvim', lazy = false, priority = 1000 },
 
-packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- use {
-  --    "sainnhe/gruvbox-material",
-  --    config = function()
-  --      vim.cmd "colorscheme gruvbox-material"
-  --    end,
-  --  }
-  --use {
-  --    'svrana/neosolarized.nvim',
-  --    requires = {'tjdevries/colorbuddy.nvim'}
-  --}
-  use { "ellisonleao/gruvbox.nvim" }
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use 'L3MON4D3/LuaSnip' -- Snippet
-  use 'hoob3rt/lualine.nvim' -- Status line
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in lsp
-  use 'hrsh7th/nvim-cmp' -- completion
-  use 'neovim/nvim-lspconfig' -- LSP
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+  -- UI
+  { 'nvim-tree/nvim-web-devicons' }, -- was kyazdani42/nvim-web-devicons
+  { 'nvim-lualine/lualine.nvim' }, -- was hoob3rt/lualine.nvim
+  { 'nvimdev/lspsaga.nvim' }, -- was glepnir/lspsaga.nvim
+  { 'nvimdev/dashboard-nvim' }, -- was glepnir/dashboard-nvim (v2 API)
+  { 'catgoose/nvim-colorizer.lua' }, -- was norcalli/nvim-colorizer.lua
+  { 'rcarriga/nvim-notify' },
 
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-  use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+  -- Completion
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/cmp-buffer' },
+  { 'L3MON4D3/LuaSnip' },
+  { 'onsails/lspkind.nvim' }, -- was onsails/lspkind-nvim
 
-  -- Neovim notification
-  -- NOTE: the original config required a `config.nvim-notify` module that was
-  -- never committed, so the setup is done inline here instead.
-  use { "rcarriga/nvim-notify", event = "BufEnter", config = function()
-    local ok, notify = pcall(require, "notify")
-    if not ok then return end
-    notify.setup {
-      stages = "fade_in_slide_out",
-      timeout = 1500,
-      background_colour = "#2E3440",
-    }
-    vim.notify = notify
-  end }
+  -- LSP
+  { 'neovim/nvim-lspconfig' },
+  { 'mason-org/mason.nvim' }, -- was williamboman/mason.nvim
+  { 'mason-org/mason-lspconfig.nvim' }, -- was williamboman/mason-lspconfig.nvim
+  { 'nvimtools/none-ls.nvim' }, -- was jose-elias-alvarez/null-ls.nvim (archived)
 
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
+  -- Treesitter (main branch: new API, requires Neovim 0.12+)
+  { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
 
-  use 'nvim-lua/plenary.nvim' -- Common utilities
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
+  -- Editing
+  { 'windwp/nvim-autopairs' },
+  { 'windwp/nvim-ts-autotag' },
 
-  -- use 'akinsho/nvim-bufferline.lua'
+  -- Fuzzy finding
+  { 'nvim-lua/plenary.nvim' },
+  { 'nvim-telescope/telescope.nvim' },
+  { 'nvim-telescope/telescope-file-browser.nvim' },
 
-  use 'norcalli/nvim-colorizer.lua'
-  use 'glepnir/dashboard-nvim'
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
+  -- Git
+  { 'lewis6991/gitsigns.nvim' },
+  { 'dinhhuy258/git.nvim' },
 
-  use 'wakatime/vim-wakatime' -- wakatime plugin
-end)
+  -- Misc
+  { 'wakatime/vim-wakatime' },
+}

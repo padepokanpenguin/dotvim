@@ -23,8 +23,8 @@ vim.opt.smarttab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.clipboard = "unnamedplus"
-vim.opt.ai = true -- Auto indent
-vim.opt.si = true -- Smart indent
+vim.opt.autoindent = true -- Auto indent
+vim.opt.smartindent = true -- Smart indent
 vim.opt.wrap = true -- Wrap lines
 vim.opt.backspace = 'start,eol,indent'
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
@@ -43,9 +43,8 @@ vim.api.nvim_command('set noswapfile')
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
--- -- Vim colorschemes
-vim.cmd([[colorscheme gruvbox]])
--- vim.cmd "colorscheme neosolarized"
+-- Colorscheme is applied by after/plugin/gruvbox.rc.lua (plugin must be loaded
+-- first, and it is loaded by lazy.nvim after this file runs).
 
 -- Turn off paste mode when leaving insert mode
 vim.api.nvim_create_autocmd("InsertLeave", {

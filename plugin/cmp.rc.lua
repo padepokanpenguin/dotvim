@@ -24,9 +24,17 @@ cmp.setup({
         { name = 'buffer' }
     }),
     formatting = {
-        format = lspkind.cmp_format({ with_text = true, maxWidth = 50 }),
-        show_labelDetails = true, -- show labelDetails in menu. Disabled by default  
-  }
+        fields = { 'abbr', 'icon', 'kind', 'menu' },
+        -- Current lspkind.nvim API: see https://github.com/onsails/lspkind.nvim
+        format = lspkind.cmp_format({
+            maxwidth = {
+                menu = 50, -- leading text (labelDetails)
+                abbr = 50, -- actual suggestion item
+            },
+            ellipsis_char = '...',
+            show_labelDetails = true,
+        }),
+    }
 })
 
 
