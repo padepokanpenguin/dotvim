@@ -62,6 +62,6 @@ db.setup({
         shortcut = 'SPC f w'
       },
     },
-    footer = { 'Penguin House Co.' },
+    footer = { 'PadepokanPenguin' },
   },
 })

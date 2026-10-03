@@ -290,7 +290,7 @@ lualine.setup {
     } },
     lualine_b = {},
     lualine_z = { function()
-      return [[PenguinHouse]]
+      return [[PadepokanPenguin]]
     end }
   },
 }
