@@ -4,62 +4,98 @@ if (not status) then
 end
 
 -- dashboard-nvim v2 configuration (see https://github.com/nvimdev/dashboard-nvim)
--- The ASCII banner below used to be assigned to a misspelled option
--- (`cusom_footer`) and therefore never rendered; it is now used as the header.
+-- The ASCII header (torii gate + penguin) was converted from the project
+-- logo image. The previous banner was lost to a misspelled option
+-- (`cusom_footer`) and therefore never rendered.
+--
+-- NOTE: the v1 built-in commands `SessionLoad` and `DashboardFindHistory` no
+-- longer exist in v2; the actions below use the current equivalents.
 db.setup({
   theme = 'doom',
   config = {
-    header = { "",
-  "                                                 ..                                                 ",
-  "                                               ..:^:.                                               ",
-  "                                             .:::::^^:.                                             ",
-  "                                           .::::.  .:^^:.                                           ",
-  "                                         .::::.      .:^^:.                                         ",
-  "                                       .:::..          .:^^^.                                       ",
-  "                                     .:::.       ....    .:^^^:                                     ",
-  "                                   ..::.        :.:::..    .:^^^:                                   ",
-  "                                 .::::         .:            .^^^^:.                                ",
-  "                                 .::::        .::   .:        ^^^^::.                               ",
-  "                                  .:::       :^^^   .:.      .^^^^.                                 ",
-  "                                  .:::      .^^^^   :::      .^^^^.                                 ",
-  "                                  .:::      ^^^^.  :.        .^^^^.                                 ",
-  "                                  .:::     .^::   .:..       .^^^^.                                 ",
-  "                                  .:::                       .^^^^.                                 ",
-  "                                  ....                        ::::.                                 ",
-  "                              ..................::....................                              ",
-  "                                                ..::::::::::::::::::::                              ",
-  "", "", " Stay Hungry, Stay Foolish ", "", ""
+    header = {
+      ".                                                      :",
+      ":%*=:.                                            .:=*%:",
+      " =@@@@@%#*++==-::::..................::::-==++*#%@@@@@=",
+      "  +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+",
+      "   :=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=:",
+      "     #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#",
+      "     .#######@@@@@########@@@@########@@@@@#######.",
+      "            .@@@@@.       #@@#       .@@@@@.",
+      "             *@@@+        #@@#        +@@@*",
+      "             +@@@=        #@@#        =@@@*",
+      "           -:*@@@+:-      #@@#      -:+@@@*:-",
+      "       ....@@@@@@@@%......#@@%......%@@@@@@@@....",
+      "      .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.",
+      "      .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.",
+      "      .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.",
+      "       .     *@@@+                    +@@@*     .",
+      "             +@@@+                    =@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+                    +@@@*",
+      "             +@@@+       --.   :-     +@@@*",
+      "             +@@@+     :%*=@=*%@*.    +@@@*",
+      "             +@@@+     -.=%@@@#-#:    +@@@*",
+      "             +@@@+      :@@@@@@-      +@@@*",
+      "             +@@@+      ##+@@+#%      +@@@*",
+      "             +@@@+      %: ## :%      +@@@*",
+      "             +@@@+      %.:@@-.%      +@@@*",
+      "             +@@@+     .@ .@@. @.     +@@@*",
+      "             +@@@+     *#  ..  #*     +@@@*",
+      "             +@@@+    :@=      =@:    +@@@*",
+      "             +@@@+    #@:      :@%    +@@@*",
+      "             +@@@+   :@@.      .@@:   +@@@*",
+      "             +@@@+   =@#.      .#@=   +@@@*",
+      "             +@@@+   **+.      .+**   =@@@*",
+      "            .#@@@#.. +:#:      :#:+ ..#@@@#.",
+      "            -@@@@@-::-:#*      *%:-::-@@@@@-",
+      "         ...=@@@@@+====#@=    =@#====+@@@@@=...",
+      "        ..:-+@@@@@*****#@@@**%@@#*****@@@@@+-:..",
+      "        .:-=*@@@@@%##%%%@@@@@@@@%%%##%@@@@@*=-:.",
+      "        .:-=*@@@@@%%%%%%%%%%%%%%%%%%%%@@@@@*=-:.",
+      "        .:-=*%%%%%####%%%%%%%%%%%%####%%%%%+=-:.",
+      "        ..:--==+++********************+++==--:..",
+      "         ..:::----====================----:::..",
+      "           .....:::::::::::--:::::::::::.....",
+      "                 ......................",
     },
     center = {
       {
         icon = '  ',
         desc = 'Recently latest session                 ',
-        shortcut = 'SPC s l',
-        action = 'SessionLoad'
+        shortcut = '\\sl',
+        action = function()
+          require('persistence').load()
+        end
       },
       {
         icon = '  ',
         desc = 'Recently opened files                   ',
-        action = 'DashboardFindHistory',
-        shortcut = 'SPC f h'
+        action = 'Telescope oldfiles',
+        shortcut = '\\sh'
       },
       {
         icon = '  ',
         desc = 'Find  File                              ',
         action = 'Telescope find_files find_command=rg,--hidden,--files',
-        shortcut = 'SPC f f'
+        shortcut = ';f'
       },
       {
         icon = '  ',
         desc = 'File Browser                            ',
         action = 'Telescope file_browser',
-        shortcut = 'SPC f b'
+        shortcut = 'sf'
       },
       {
         icon = '  ',
         desc = 'Find  word                              ',
         action = 'Telescope live_grep',
-        shortcut = 'SPC f w'
+        shortcut = ';r'
       },
     },
     footer = { 'PadepokanPenguin' },

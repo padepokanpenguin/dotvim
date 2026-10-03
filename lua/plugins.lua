@@ -49,6 +49,9 @@ return {
   { 'lewis6991/gitsigns.nvim' },
   { 'dinhhuy258/git.nvim' },
 
+  -- Sessions (used by the dashboard's "Recently latest session" entry)
+  { 'folke/persistence.nvim' },
+
   -- Misc
   { 'wakatime/vim-wakatime' },
 }
