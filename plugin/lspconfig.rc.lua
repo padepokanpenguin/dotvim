@@ -54,28 +54,46 @@ protocol.CompletionItemKind = {
 }
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
+local ok_cmp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+if ok_cmp then
+  capabilities = cmp_lsp.default_capabilities(capabilities)
+end
 
-nvim_lsp.flow.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+-- Some servers were renamed/removed in newer nvim-lspconfig releases.
+-- lspconfig lazily loads server configs and emits a one-time deprecation
+-- backtrace on first access; we silence only that access, then set up.
+local function safe_setup(name, opts)
+  local orig_deprecate = vim.deprecate
+  vim.deprecate = function() end
+  local ok, srv = pcall(function() return nvim_lsp[name] end)
+  vim.deprecate = orig_deprecate
+  if ok and srv then
+    srv.setup(opts or {})
+  else
+    vim.schedule(function()
+      vim.notify('lspconfig: server "' .. name .. '" unavailable, skipped',
+        vim.log.levels.DEBUG)
+    end)
+  end
+end
 
---nvim_lsp.tsserver.setup {
+-- "flow" and "tsserver" were removed/renamed upstream (tsserver -> ts_ls).
+--safe_setup('flow', {
+--  on_attach = on_attach,
+--  capabilities = capabilities
+--})
+
+--safe_setup('tsserver', {
 --  on_attach = on_attach,
 --  cmd = { "typescript-language-server", "--stdio" },
 --  capabilities = capabilities
---}
+--})
 
-nvim_lsp.tsserver.setup {}
-
-nvim_lsp.sourcekit.setup {
-  on_attach = on_attach,
-}
-
-nvim_lsp.lua_ls.setup {
+safe_setup('ts_ls')
+-- sourcekit only exists on macOS builds of lspconfig
+--safe_setup('sourcekit', { on_attach = on_attach })
+safe_setup('lua_ls', {
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -91,21 +109,12 @@ nvim_lsp.lua_ls.setup {
       },
     },
   },
-}
+})
+
 
 --nvim_lsp.sumneko_lua.setup {}
 
-nvim_lsp.tailwindcss.setup {}
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-  virtual_text = { spacing = 4, prefix = "●" },
-  severity_sort = true,
-}
-)
-
+safe_setup('tailwindcss')
 -- Diagnostic symbols in the sign column (gutter)
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do

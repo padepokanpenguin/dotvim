@@ -39,10 +39,17 @@ packer.startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
 
   -- Neovim notification
+  -- NOTE: the original config required a `config.nvim-notify` module that was
+  -- never committed, so the setup is done inline here instead.
   use { "rcarriga/nvim-notify", event = "BufEnter", config = function()
-    vim.defer_fn(function()
-      require("config.nvim-notify")
-    end, 2000)
+    local ok, notify = pcall(require, "notify")
+    if not ok then return end
+    notify.setup {
+      stages = "fade_in_slide_out",
+      timeout = 1500,
+      background_colour = "#2E3440",
+    }
+    vim.notify = notify
   end }
 
   use 'windwp/nvim-autopairs'

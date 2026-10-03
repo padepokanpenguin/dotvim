@@ -10,5 +10,5 @@ end
 mason.setup({})
 
 lspconfig.setup {
-    ensure_installed = {"synk_ls", "typos_lsp"}
+    ensure_installed = {"snyk_ls", "typos_lsp"}
 }
