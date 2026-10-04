@@ -48,6 +48,64 @@ null_ls.setup({
     ruff_format,
     -- C# (.NET)
     null_ls.builtins.formatting.csharpier.with({ filetypes = { 'cs', 'csproj' } }),
+
+    -- Security: static analysis (replaces the account-gated snyk_ls)
+    -- Semgrep needs a ruleset: `auto` pulls the curated registry ruleset
+    -- (network on the first run, cached afterwards).
+    -- none-ls kills a generator after 5s by default and a semgrep run takes
+    -- ~5s even with a warm cache, so the timeout has to be raised.
+    null_ls.builtins.diagnostics.semgrep.with({
+      filetypes = {
+        'python',
+        'go',
+        'cs',
+        'lua',
+        'php',
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'java',
+        'ruby',
+        'json',
+        'yaml',
+        'sh',
+        'dockerfile',
+        'terraform',
+      },
+      extra_args = { '--config', 'auto' },
+      timeout = 60000,
+    }),
+
+    -- Security: hardcoded secrets / credentials.
+    -- gitleaks' builtin runs on every filetype by default, which is wasteful,
+    -- so it is limited to the filetypes where secrets actually show up.
+    null_ls.builtins.diagnostics.gitleaks.with({
+      filetypes = {
+        'lua',
+        'python',
+        'go',
+        'cs',
+        'php',
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'json',
+        'jsonc',
+        'yaml',
+        'toml',
+        'sh',
+        'bash',
+        'zsh',
+        'dotenv',
+        'conf',
+        'ini',
+        'dockerfile',
+        'markdown',
+      },
+      timeout = 10000,
+    }),
   },
 })
 

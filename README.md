@@ -65,6 +65,26 @@ it needs an authenticated account and otherwise only reports
 `Auth initializer failed to authenticate`. Export `SNYK_TOKEN` and it is enabled
 automatically.
 
+## Security scanning
+
+Snyk is account-gated, so the config uses two scanners that need no account:
+
+| Tool | What it catches | Source |
+| --- | --- | --- |
+| **semgrep** | static analysis (SAST) — `eval`, `subprocess(shell=True)`, injection patterns, … | `null-ls.builtins.diagnostics.semgrep` with `--config auto` |
+| **gitleaks** | hardcoded secrets and credentials | `null-ls.builtins.diagnostics.gitleaks` |
+
+Both are installed by `mason-tool-installer` and run on the filetypes where they
+make sense (semgrep: code languages; gitleaks: code + config/env files).
+
+Two settings worth knowing:
+
+- semgrep's `--config auto` fetches the curated registry ruleset on first use
+  (network required once, then cached).
+- none-ls kills a generator after **5 s** by default and a semgrep run takes
+  ~5 s even warm, so the semgrep source overrides `timeout` (60 s); gitleaks
+  gets 10 s.
+
 ## Design notes
 
 - **Plugin manager**: `lazy.nvim`. `packer.nvim` was replaced (archived

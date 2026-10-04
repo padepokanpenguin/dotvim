@@ -47,6 +47,8 @@ installer.setup {
         "gofumpt", -- Go formatter
         "ruff", -- Python formatter/linter
         "csharpier", -- C# formatter
+        "semgrep", -- security: static analysis (SAST)
+        "gitleaks", -- security: hardcoded secrets
     },
     run_on_start = true,
 }
