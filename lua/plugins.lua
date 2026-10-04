@@ -32,6 +32,7 @@ return {
   { 'mason-org/mason.nvim' }, -- was williamboman/mason.nvim
   { 'mason-org/mason-lspconfig.nvim' }, -- was williamboman/mason-lspconfig.nvim
   { 'nvimtools/none-ls.nvim' }, -- was jose-elias-alvarez/null-ls.nvim (archived)
+  { 'WhoIsSethDaniel/mason-tool-installer.nvim' }, -- declarative formatter/linter installs
 
   -- Treesitter (main branch: new API, requires Neovim 0.12+)
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },

@@ -19,6 +19,8 @@ the maintained upstream of every plugin it uses.
 | C compiler (`build-essential` / `gcc`) | compiling parsers |
 | `ripgrep`, `fd` | Telescope (`fd` is `fdfind` on Debian/Ubuntu) |
 | `node` + `npm` | language servers installed through Mason |
+| Go toolchain | `gopls` and `gofumpt` (installed via Mason) |
+| .NET SDK (8.0+) | `csharp-ls` and `csharpier` (installed via Mason) |
 | `xclip` (or `wl-clipboard`) | `clipboard=unnamedplus` |
 | `prettierd` | formatting of web filetypes via none-ls |
 
@@ -48,6 +50,46 @@ lsp/*.lua                    per-server LSP settings (vim.lsp.config)
 plugin/*.rc.lua              configuration sourced at startup
 after/plugin/*.rc.lua        configuration sourced after all plugins load
 ```
+
+## Language support
+
+| Language | Server | Formatter | Parser |
+| --- | --- | --- | --- |
+| TypeScript / JavaScript | `ts_ls` | `prettierd` | `tsx`, `typescript` |
+| Tailwind CSS | `tailwindcss` | `prettierd` | `css` |
+| PHP / HTML / JSON | `typos_lsp` | `prettierd` | `php`, `html`, `json` |
+| Lua | `lua_ls` | — | `lua` |
+| **C# (.NET)** | `csharp_ls` | `csharpier` | `c_sharp` |
+| **Go** | `gopls` | `gofumpt` | `go` |
+| **Python** | `basedpyright` | `ruff` (`ruff format`) | `python` |
+
+Servers are installed by `mason-lspconfig` and formatters by
+`mason-tool-installer`; per-server settings live in `lsp/<server>.lua`.
+
+`snyk_ls` (Snyk security scanner) is installed but **not started by default**:
+it needs an authenticated account and otherwise only reports
+`Auth initializer failed to authenticate`. Export `SNYK_TOKEN` and it is enabled
+automatically.
+
+## Security scanning
+
+Snyk is account-gated, so the config uses two scanners that need no account:
+
+| Tool | What it catches | Source |
+| --- | --- | --- |
+| **semgrep** | static analysis (SAST) — `eval`, `subprocess(shell=True)`, injection patterns, … | `null-ls.builtins.diagnostics.semgrep` with `--config auto` |
+| **gitleaks** | hardcoded secrets and credentials | `null-ls.builtins.diagnostics.gitleaks` |
+
+Both are installed by `mason-tool-installer` and run on the filetypes where they
+make sense (semgrep: code languages; gitleaks: code + config/env files).
+
+Two settings worth knowing:
+
+- semgrep's `--config auto` fetches the curated registry ruleset on first use
+  (network required once, then cached).
+- none-ls kills a generator after **5 s** by default and a semgrep run takes
+  ~5 s even warm, so the semgrep source overrides `timeout` (60 s); gitleaks
+  gets 10 s.
 
 ## Design notes
 

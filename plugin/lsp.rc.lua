@@ -42,3 +42,11 @@ for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
+
+-- Snyk is an account-gated security scanner: without a token the server only
+-- reports "Auth initializer failed to authenticate" on every buffer. Start it
+-- only when a token is available (mason-lspconfig excludes it from automatic
+-- enable, see after/plugin/mason.rc.lua).
+if vim.env.SNYK_TOKEN and vim.env.SNYK_TOKEN ~= '' then
+  vim.lsp.enable('snyk_ls')
+end

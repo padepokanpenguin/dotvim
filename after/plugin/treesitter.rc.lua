@@ -11,12 +11,17 @@ ts.setup {}
 
 -- Parsers to keep installed. install() is a no-op for parsers already present.
 ts.install {
+  -- web
   "tsx",
   "php",
   "json",
   "css",
   "html",
   "lua",
+  -- C# / Go / Python
+  "c_sharp",
+  "go",
+  "python",
 }
 
 -- Enable treesitter highlighting (and experimental treesitter indentation)
