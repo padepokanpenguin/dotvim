@@ -13,6 +13,8 @@ the maintained upstream of every plugin it uses.
 | C compiler (`build-essential` / `gcc`) | compiling parsers |
 | `ripgrep`, `fd` | Telescope (`fd` is `fdfind` on Debian/Ubuntu) |
 | `node` + `npm` | language servers installed through Mason |
+| Go toolchain | `gopls` and `gofumpt` (installed via Mason) |
+| .NET SDK (8.0+) | `csharp-ls` and `csharpier` (installed via Mason) |
 | `xclip` (or `wl-clipboard`) | `clipboard=unnamedplus` |
 | `prettierd` | formatting of web filetypes via none-ls |
 
@@ -42,6 +44,21 @@ lsp/*.lua                    per-server LSP settings (vim.lsp.config)
 plugin/*.rc.lua              configuration sourced at startup
 after/plugin/*.rc.lua        configuration sourced after all plugins load
 ```
+
+## Language support
+
+| Language | Server | Formatter | Parser |
+| --- | --- | --- | --- |
+| TypeScript / JavaScript | `ts_ls` | `prettierd` | `tsx`, `typescript` |
+| Tailwind CSS | `tailwindcss` | `prettierd` | `css` |
+| PHP / HTML / JSON | `snyk_ls`, `typos_lsp` | `prettierd` | `php`, `html`, `json` |
+| Lua | `lua_ls` | — | `lua` |
+| **C# (.NET)** | `csharp_ls` | `csharpier` | `c_sharp` |
+| **Go** | `gopls` | `gofumpt` | `go` |
+| **Python** | `basedpyright` | `ruff` (`ruff format`) | `python` |
+
+Servers are installed by `mason-lspconfig` and formatters by
+`mason-tool-installer`; per-server settings live in `lsp/<server>.lua`.
 
 ## Design notes
 
