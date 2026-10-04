@@ -25,6 +25,13 @@ mason_lspconfig.setup {
         "gopls",
         "basedpyright",
     },
+    -- snyk_ls refuses to work without an authenticated Snyk account and only
+    -- logs "Auth initializer failed to authenticate" otherwise, so it is not
+    -- started automatically. It is enabled in plugin/lsp.rc.lua when SNYK_TOKEN
+    -- is present in the environment.
+    automatic_enable = {
+        exclude = { "snyk_ls" },
+    },
 }
 
 -- Tools that are not language servers (formatters/linters) are managed

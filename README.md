@@ -51,7 +51,7 @@ after/plugin/*.rc.lua        configuration sourced after all plugins load
 | --- | --- | --- | --- |
 | TypeScript / JavaScript | `ts_ls` | `prettierd` | `tsx`, `typescript` |
 | Tailwind CSS | `tailwindcss` | `prettierd` | `css` |
-| PHP / HTML / JSON | `snyk_ls`, `typos_lsp` | `prettierd` | `php`, `html`, `json` |
+| PHP / HTML / JSON | `typos_lsp` | `prettierd` | `php`, `html`, `json` |
 | Lua | `lua_ls` | — | `lua` |
 | **C# (.NET)** | `csharp_ls` | `csharpier` | `c_sharp` |
 | **Go** | `gopls` | `gofumpt` | `go` |
@@ -59,6 +59,11 @@ after/plugin/*.rc.lua        configuration sourced after all plugins load
 
 Servers are installed by `mason-lspconfig` and formatters by
 `mason-tool-installer`; per-server settings live in `lsp/<server>.lua`.
+
+`snyk_ls` (Snyk security scanner) is installed but **not started by default**:
+it needs an authenticated account and otherwise only reports
+`Auth initializer failed to authenticate`. Export `SNYK_TOKEN` and it is enabled
+automatically.
 
 ## Design notes
 
