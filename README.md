@@ -3,6 +3,12 @@
 Personal Neovim configuration, kept up to date with the current Neovim APIs and
 the maintained upstream of every plugin it uses.
 
+## Preview
+
+[![dotvim demo preview](assets/demo/preview.gif)](assets/demo/nvim.mp4)
+
+<sub>Click the preview above to open the full video demonstration (`assets/demo/nvim.mp4`).</sub>
+
 ## Requirements
 
 | Tool | Why |
